@@ -7,10 +7,11 @@ The data from the study (NCBI Bioproject ID PRJNA622674) can be accessed [here](
 
 ### Steps to run the pipeline
 
-1. Clone the github repo at ..... and navigate to the directory
+1. Clone the github repo at  and navigate to the directory
 
 `
-
+git clone https://github.com/MGordon09/metagenomics_mpa3.git
+cd metagenomics_mpa3
 `
 
 
@@ -20,26 +21,26 @@ The data from the study (NCBI Bioproject ID PRJNA622674) can be accessed [here](
  conda env create --name metaphlan3 --file=environment_test.yml
 `
 
-3. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database using bowtie2 (NB change the bowtie2 installation version to suit your system architecture - bowtie2 releases available [here](https://github.com/BenLangmead/bowtie2/releases)
+3. For linux users, edit the bowtie2 installation section of  `prepare_metaphlandb.sh` script in the `prepare_metaphlan()` process  (section commented in code).
+Linux users will also need to modify `run_metaphlan3.sh` script in the `run_metaphlan()` process (also highlighted in code)
+(Other bowtie2 releases available [here](https://github.com/BenLangmead/bowtie2/releases)
 
-Edit the  `prepare_metaphlandb.sh` script at the `prepare_metaphlan()` section for cluster deployment (highlighted in code):
-(NB for HPC use will also need to modify `run_metaphlan3.sh`   `run_metaphlan()` process (section highlighted in code))
 
-$ ./prepare_metaphlandb.sh
-`
-
-4. Change the READS and LINKPATH_DB file paths in the `run_metagenomics.sh` script.
-The READ path should point to the location of the reads on your system.
-The LINKPATH_DB will point to the folder storing the metaphlan reference database. This path will be given as output by `prepare_metaphlandb.sh`
+4. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database.
 
 `
-#edit paths in `run_metagenomics.sh`
+./prepare_metaphlandb.sh
+`
 
+4. Change the `$READS` and `$LINKPATH_DB` file paths in the `run_metagenomics.sh` script.
+The `$READS` path should point to the folder containing your reads.
+The `$LINKPATH_DB` will point to the folder storing the metaphlan reference database (given as output by `prepare_metaphlandb.sh`)
+`
 READS=/FULL/PATH/TO/data/
 LINKPATH_DB=/FULL/PATH/TO/reference 
 `
 
-5. Finally, run the `run_metagenomics.sh` script.  
+5. Finally, run the `run_metagenomics.sh` script.  (Dont forget to `prepare_metaphlandb.sh` if running on linux! )
 `
-$ ./run_metagenomics.sh
+./run_metagenomics.sh
 `
