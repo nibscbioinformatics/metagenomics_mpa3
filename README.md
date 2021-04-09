@@ -1,7 +1,10 @@
 ## Shotgun Metagenomics Workflow
 
+
+Work in progress...
+
 ### Test data
-The test data used for this workflow was provided by the authors of 'Developing standards for the microbiome field' (publication available [here](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00856-3]))
+The test data used for this workflow was provided by the authors of 'Developing standards for the microbiome field' (https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00856-3])
 The data from the study (NCBI Bioproject ID PRJNA622674) can be accessed [here](https://www.ncbi.nlm.nih.gov/sra/10506348,10506347,10506346,10506345,10506339,10506328,10506322,10506321,10506320,10506319,10506318,10506317,10506316,10506315,10506314,10506313,10506312,10506311,10506310,10506309)
 
 
@@ -10,7 +13,9 @@ The data from the study (NCBI Bioproject ID PRJNA622674) can be accessed [here](
 1. Clone the github repo at  and navigate to the directory
 
 `
-git clone https://github.com/MGordon09/metagenomics_mpa3.git \
+git clone https://github.com/MGordon09/metagenomics_mpa3.git 
+`
+`
 cd metagenomics_mpa3
 `
 
@@ -40,7 +45,7 @@ READS=/FULL/PATH/TO/data/
 LINKPATH_DB=/FULL/PATH/TO/reference 
 `
 
-5. Finally, run the `run_metagenomics.sh` script.  (Dont forget to `prepare_metaphlandb.sh` if running on linux! )
+5. Finally, run the `run_metagenomics.sh` script.  (Dont forget to change `run_metaphlan3.sh` script  if running on linux!)
 `
 ./run_metagenomics.sh
 `
