@@ -13,7 +13,7 @@ The data from the study (NCBI Bioproject ID PRJNA622674) can be accessed [here](
 1. Clone the github repo and navigate to the directory
 
 ```
-git clone https://github.com/MGordon09/metagenomics_mpa3.git 
+git clone git@github.com:nibscbioinformatics/metagenomics_mpa3.git
 cd metagenomics_mpa3
 ```
 
