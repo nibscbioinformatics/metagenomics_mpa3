@@ -6,7 +6,7 @@
 ## Root folder name
 NAME=nibsc_metagenomics
 
-echo "Please Check File Paths in run_metagenomics.sh"
+echo "Please Check File Paths in main_metagenomics.sh"
 
 ## data file locations
 READS='/home/AD/mgordon/Microbiome_Project/31_03_21_Shotgun_Sequencing/rawdata' #change path to you data directory... use $1?
@@ -19,10 +19,10 @@ LINKPATH_DB=/home/AD/mgordon/Microbiome_Project/31_03_21_Shotgun_Sequencing/meta
 metagenomics_analysis_main(){
    create_folders 
    set_variables # -> Never comment this function
-   #fetch_example_data # -> Uncomment this function if you want to run pipeline on test data
-   #copy_rawdata 
-   #run_bbduk 
-   #run_seqtk
+   #fetch_example_data # -> Uncomment this function if you want to run pipeline on test data. NOT Finished! need data in NIBSC format
+   copy_rawdata 
+   run_bbduk 
+   run_seqtk
    run_metaphlan
    echo $LINKPATH_DB
 }
@@ -84,8 +84,9 @@ fetch_example_data(){
 
    cd $NAME/example_data
 
-   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_1.fastq.gz
-   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_2.fastq.gz
+
+#   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_1.fastq.gz
+#   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_2.fastq.gz
 
    SRC_RAWDATA=$NAME/example_data
    cd -

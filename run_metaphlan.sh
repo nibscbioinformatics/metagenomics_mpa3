@@ -8,7 +8,7 @@ metaphlan_main(){
         activate_conda_env
 	run_metaphlan
 	merge_tables
-	cleanup_tmp #get running
+	#cleanup_tmp #leave out for now
 
 }
 

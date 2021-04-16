@@ -6,7 +6,7 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1
   - _openmp_mutex=4.5
-  - bbmap=38.90
+  - bbmap=37.62 #chrysis version 
   - bcbio-gff=0.6.6
   - biom-format=2.1.10
   - biopython=1.78
@@ -124,7 +124,7 @@ dependencies:
   - scipy=1.6.2
   - seaborn=0.11.1
   - seaborn-base=0.11.1
-  - seqtk=1.3
+  - seqtk=1.3 #need to check version
   - setuptools=49.6.0
   - six=1.15.0
   - sqlite=3.35.4

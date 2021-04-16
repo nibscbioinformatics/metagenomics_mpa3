@@ -31,7 +31,7 @@ conda env create --name metaphlan3 --file=environment.yml
 ./prepare_metaphlandb.sh
 ```
 
-4. Change the `$READS` and `$LINKPATH_DB` file paths in the `run_metagenomics.sh` script.
+4. Change the `$READS` and `$LINKPATH_DB` file paths in the `main_metagenomics.sh` script.
 - `$READS` path should point to the folder containing your reads.
 - `$LINKPATH_DB` should point to the folder storing the metaphlan reference database (given as output by `prepare_metaphlandb.sh`)
 
@@ -44,7 +44,7 @@ conda env create --name metaphlan3 --file=environment.yml
 ## Root folder name
 NAME=YOURFOLDERNAME
 
-echo "Please Check File Paths in run_metagenomics.sh"
+echo "Please Check File Paths in main_metagenomics.sh"
 
 READS=/FULL/PATH/TO/data/
 LINKPATH_DB=/FULL/PATH/TO/reference 
