@@ -10,7 +10,7 @@
 
 prepare_databases_main(){
    create_folders
-   #prepare_conda
+   #prepare_conda run this seperately I think ... only need 1 run
    prepare_metaphlan
    #cleanup_tmp  #need Bowtie2 for metaphlan run... 
    #prepare_humanndb #possible future feature
@@ -37,10 +37,10 @@ create_folders(){
 
 prepare_conda(){
 
-   echo "Building conda env... 
+  echo "Building conda env... 
   #eval "$(conda shell.bash hook)" #conda initialisation - more generalisable as dont specify conda.sh location (try on cluster)
   #conda env create -f environment_test.yml -n metaphlan3 #check if works
-   echo "DONE building conda env!
+  echo "DONE building conda env!
 
 }
 
@@ -57,23 +57,23 @@ prepare_metaphlan(){
       # maybe if statment for CL arg (if macOS download x, elif linux download y, rename the compiled bowtie2 folder so works same downstream? 	
 
       cd $TMP
-   #  wget https://github.com/BenLangmead/bowtie2/releases/download/v2.4.2/bowtie2-2.4.2-linux-x86_64.zip #uncomment for HPC
-   #  unzip bowtie2-2.4.2-linux-x86_64.zip
-   #  rm bowtie2-2.4.2-linux-x86_64.zip
-   #  export PATH=$PATH"${TMP}/bowtie2-2.4.2-linux-x86_64:"
+     wget https://github.com/BenLangmead/bowtie2/releases/download/v2.4.2/bowtie2-2.4.2-linux-x86_64.zip #uncomment for HPC
+     unzip bowtie2-2.4.2-linux-x86_64.zip
+     rm bowtie2-2.4.2-linux-x86_64.zip
+     export PATH=$PATH"${TMP}/bowtie2-2.4.2-linux-x86_64:"
 
-      wget https://github.com/BenLangmead/bowtie2/releases/download/v2.4.2/bowtie2-2.4.2-macos-x86_64.zip #comment for HPC
-      unzip bowtie2-2.4.2-macos-x86_64.zip  #comment for HPC
-      rm bowtie2-2.4.2-macos-x86_64.zip  #comment for HPC
-      export PATH=$PATH"${TMP}/bowtie2-2.4.2-macos-x86_64:" #fix 
+      #wget https://github.com/BenLangmead/bowtie2/releases/download/v2.4.2/bowtie2-2.4.2-macos-x86_64.zip #comment for HPC
+      #unzip bowtie2-2.4.2-macos-x86_64.zip  #comment for HPC
+      #rm bowtie2-2.4.2-macos-x86_64.zip  #comment for HPC
+      #export PATH=$PATH"${TMP}/bowtie2-2.4.2-macos-x86_64:" #fix 
 
       mkdir -p ${REFERENCE_FOLDER}/reference_database/metaphlan3
       cd ${REFERENCE_FOLDER}/reference_database/metaphlan3
       wget https://www.dropbox.com/sh/7qze7m7g9fe2xjg/AADlxibskzbPHPoDl6S-FyKka/mpa_v30_CHOCOPhlAn_201901.tar?dl=0
       tar -xvvf mpa_v30_CHOCOPhlAn_201901.tar?dl=0
       bunzip2 mpa_v30_CHOCOPhlAn_201901.fna.bz2
-      ${TMP}/bowtie2-2.4.2-macos-x86_64/bowtie2-build --threads 8 mpa_v30_CHOCOPhlAn_201901.fna mpa_v30_CHOCOPhlAn_201901 #comment for HPC
-      #${TMP}/bowtie2-2.4.2-linux-x86_64/bowtie2-build --threads 8 mpa_v30_CHOCOPhlAn_201901.fna mpa_v30_CHOCOPhlAn_201901 #uncomment for linux 
+      #${TMP}/bowtie2-2.4.2-macos-x86_64/bowtie2-build --threads 8 mpa_v30_CHOCOPhlAn_201901.fna mpa_v30_CHOCOPhlAn_201901 #comment for HPC
+      ${TMP}/bowtie2-2.4.2-linux-x86_64/bowtie2-build --threads 8 mpa_v30_CHOCOPhlAn_201901.fna mpa_v30_CHOCOPhlAn_201901 #uncomment for linux 
       rm mpa_v30_CHOCOPhlAn_201901.tar?dl=0
 
    fi

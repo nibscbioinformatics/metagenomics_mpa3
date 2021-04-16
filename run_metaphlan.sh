@@ -38,11 +38,11 @@ inputdatalist=$(ls -d ${ANALYSIS_FOLDER}/seqtk_output/combined* | awk '{print $N
 for read in ${inputdatalist}
 do
 
-echo "Running metaphlan on sample ${fname}"
 fname=$(basename ${read} | sed -e "s/_1.fastq.gz//") 
-metaphlan ${read} --input_type fastq --no_map --index mpa_v30_CHOCOPhlAn_201901 --bowtie2db ${REFERENCE_FOLDER}/reference_database/metaphlan3 --bowtie2_exe ${LINKPATH_DB}/tmp/bowtie2-2.4.2-macos-x86_64/bowtie2  -o  ${ANALYSIS_FOLDER}/metaphlan/profiles/${fname}_profile.txt
+echo "Running metaphlan on sample ${fname}"
+#metaphlan ${read} --input_type fastq --no_map --index mpa_v30_CHOCOPhlAn_201901 --bowtie2db ${REFERENCE_FOLDER}/reference_database/metaphlan3 --bowtie2_exe ${LINKPATH_DB}/tmp/bowtie2-2.4.2-macos-x86_64/bowtie2  -o  ${ANALYSIS_FOLDER}/metaphlan/profiles/${fname}_profile.txt
 #HPC command below - comment out above line for HPC deployment
-#metaphlan ${read} --input_type fastq --no_map --index mpa_v30_CHOCOPhlAn_201901 --bowtie2db ${REFERENCE_FOLDER}/reference_database/metaphlan3 --bowtie2_exe ${LINKPATH_DB}/tmp/bowtie2-2.4.2-linux-x86_64/bowtie2  -o  ${ANALYSIS_FOLDER}/metaphlan/profiles/${fname}_profile.txt
+metaphlan ${read} --input_type fastq --no_map --index mpa_v30_CHOCOPhlAn_201901 --bowtie2db ${REFERENCE_FOLDER}/reference_database/metaphlan3 --bowtie2_exe ${LINKPATH_DB}/tmp/bowtie2-2.4.2-linux-x86_64/bowtie2  -o  ${ANALYSIS_FOLDER}/metaphlan/profiles/${fname}_profile.txt
 done
 
 }

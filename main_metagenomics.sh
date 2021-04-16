@@ -9,8 +9,8 @@ NAME=nibsc_metagenomics
 echo "Please Check File Paths in run_metagenomics.sh"
 
 ## data file locations
-READS='/Users/martingordon/Desktop/metaphlan_prac/data/' #change path to you data directory... use $1?
-LINKPATH_DB=/Users/martingordon/Desktop/metagenomics_mpa3/reference #change path
+READS='/home/AD/mgordon/Microbiome_Project/31_03_21_Shotgun_Sequencing/rawdata' #change path to you data directory... use $1?
+LINKPATH_DB=/home/AD/mgordon/Microbiome_Project/31_03_21_Shotgun_Sequencing/metagenomics_mpa3/reference #change path
 # ADAPTERs='/Users/martingordon/src_git/bbmap/resources/adapters.fa' dont need this 
 
 
@@ -20,9 +20,9 @@ metagenomics_analysis_main(){
    create_folders 
    set_variables # -> Never comment this function
    #fetch_example_data # -> Uncomment this function if you want to run pipeline on test data
-   copy_rawdata 
-   run_bbduk 
-   run_seqtk
+   #copy_rawdata 
+   #run_bbduk 
+   #run_seqtk
    run_metaphlan
    echo $LINKPATH_DB
 }

@@ -20,16 +20,20 @@ activate_conda_env(){
 
 seqtk_subsampling(){
 
+
+#following old output 
+
 cd ${ANALYSIS_FOLDER}
 mkdir -p ${ANALYSIS_FOLDER}/seqtk_output
-trimdatalist=$(ls -d ${ANALYSIS_FOLDER}/bbduk_trimmed_reads/*_1.fastq.gz | awk '{print $NF}') 
+trimdatalist=$(ls -d ${ANALYSIS_FOLDER}/bbduk_trimmed_reads/*_cleaned_1.fastq.gz | awk '{print $NF}') 
 
 for read in ${trimdatalist}
 do
-
-read2=${read%_1*}_2.fastq.gz
-fname=$(basename ${read} | sed -e "s/_1.fastq.gz//") #strip path and extension
-
+echo $read
+read2=${read/_cleaned_1.fastq.gz/_cleaned_2.fastq.gz}
+echo $read2
+fname=$(basename ${read} | sed -e "s/_cleaned_1.fastq.gz//") #strip path and extension
+echo $fname
 echo "Running seqtk subsamping (500k) & merging on sample ${fname}"
 
 seqtk sample -s100 ${read} 250000 > seqtk_output/${fname}_250K_1.fastq.gz
