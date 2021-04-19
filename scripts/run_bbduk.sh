@@ -1,27 +1,18 @@
 #!/usr/bin/env bash
 
 ### BBDuk adapter and quality trimming (adjust parameters as necessary)
-### Adapter hard coded -think I will do something here like db - check for adapters, if not download
 
 bbduk_main(){
 	
-        activate_conda_env
 	bbduk_trim
 
-}
-
-activate_conda_env(){
-	
-        eval "$(conda shell.bash hook)" #conda initilization - more generalisable dont specify conda.sh location
-	conda activate metaphlan3
-	
 }
 
 bbduk_trim(){
 
 cd ${ANALYSIS_FOLDER}
 mkdir -p ${ANALYSIS_FOLDER}/bbduk_trimmed_reads
-rawdatalist=$(ls -d $RAWDATA_FOLDER/*_R1_*.fastq.gz | awk '{print $NF}') #prints last column/field
+rawdatalist=$(ls -d $RAWDATA_FOLDER/*_R1_*.fastq.gz | awk '{print $NF}') #could also use find
 
 for read in ${rawdatalist}
 do

@@ -21,7 +21,7 @@ cd metagenomics_mpa3
 2. Create a conda enviroment to perform the analysis by running the following (NB environment must be named metaphlan3)
 
 ```
-conda env create --name metaphlan3 --file=environment.yml
+conda env create --name metaphlan3 --file=./docs/environment.yml
 ```
 
 

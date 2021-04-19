@@ -5,17 +5,9 @@
 
 metaphlan_main(){
 	
-        activate_conda_env
 	run_metaphlan
 	merge_tables
 	#cleanup_tmp #leave out for now
-
-}
-
-activate_conda_env(){
-	
-        eval "$(conda shell.bash hook)"
-	conda activate metaphlan3
 
 }
 

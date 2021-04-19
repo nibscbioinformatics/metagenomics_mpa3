@@ -1,27 +1,16 @@
 #!/usr/bin/env bash
 
-### Read subsampling & merging (adjust parameters as necessary)
+### Read subsampling (500k) & merging (adjust parameters as necessary)
 
 
 seqtk_main(){
-	activate_conda_env
+
 	seqtk_subsampling
 }
 
 
-#will need a script to generate the conda environments from the a yml file in a certain location to run
-#provide this in main script to build conda env
-
-activate_conda_env(){
-	eval "$(conda shell.bash hook)" #conda initilization - more generalisable dont specify conda.sh location
-	conda activate metaphlan3
-	
-}
-
 seqtk_subsampling(){
 
-
-#following old output 
 
 cd ${ANALYSIS_FOLDER}
 mkdir -p ${ANALYSIS_FOLDER}/seqtk_output
