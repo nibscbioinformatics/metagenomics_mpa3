@@ -17,21 +17,22 @@ git clone https://github.com/nibscbioinformatics/metagenomics_mpa3.git
 cd metagenomics_mpa3
 ```
 
+2. Activate conda (If not installed see [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) for instructions )
 
-2. Create a conda enviroment to perform the analysis by running the following (NB environment must be named metaphlan3)
+3. Create a conda enviroment to perform the analysis by running the following (NB environment must be named metaphlan3)
 
 ```
 conda env create --name metaphlan3 --file=./docs/environment.yml
 ```
 
 
-3. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database.
+4. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database.
 
 ```
 ./prepare_metaphlandb.sh
 ```
 
-4. Change the `$READS` and `$LINKPATH_DB` file paths in the `main_metagenomics.sh` script.
+5. Change the `$READS` and `$LINKPATH_DB` file paths in the `main_metagenomics.sh` script.
 - `$READS` path should point to the folder containing your reads.
 - `$LINKPATH_DB` should point to the folder storing the metaphlan reference database (given as output by `prepare_metaphlandb.sh`)
 
@@ -50,7 +51,7 @@ READS=/FULL/PATH/TO/data/
 LINKPATH_DB=/FULL/PATH/TO/reference 
 ```
 
-5. Finally, run the `main_metagenomics.sh` script.  
+6. Finally, run the `main_metagenomics.sh` script.  
 ```
 ./main_metagenomics.sh
 ```
