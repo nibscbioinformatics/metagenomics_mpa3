@@ -2,6 +2,8 @@
 
 ### Read subsampling (500k) & merging (adjust parameters as necessary)
 
+# Reads are subsampled to 250,000 per file and combined to give 500,000 reads total
+# -S option NB to keep same for both strands to preserve read pairing 
 
 seqtk_main(){
 
@@ -32,7 +34,5 @@ cat  seqtk_output/${fname}_250K_1.fastq.gz seqtk_output/${fname}_250K_2.fastq.gz
 done 
 
 }
-
-#run the processes
 
 seqtk_main
