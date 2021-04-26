@@ -7,7 +7,6 @@
 
 prepare_databases_main(){
    create_folders
-   #prepare_conda
    prepare_metaphlan
    #prepare_humanndb #possible future feature
    #prepare_krakendb Chrysi requested feature
@@ -31,17 +30,6 @@ create_folders(){
    echo "DONE creating sub-folders!"
 }
 
-prepare_conda(){
-
-  #some issues here... activate conda and build env outside of script?
-
-  echo "Building conda env... "
-  #eval "$(conda shell.bash hook)" #not working... how we alter conda initialisation? 
-  conda env create -f ./docs/environment_test.yml -n metaphlan3 
-  conda activate metaphlan3
-  echo "DONE building conda env!"
-
-}
 
 prepare_metaphlan(){
 

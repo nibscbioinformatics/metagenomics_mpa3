@@ -17,19 +17,19 @@ bbduk_trim(){
 
 cd ${ANALYSIS_FOLDER}
 mkdir -p ${ANALYSIS_FOLDER}/bbduk_trimmed_reads
-rawdatalist=$(ls -d $RAWDATA_FOLDER/*_R1_*.fastq.gz | awk '{print $NF}') 
+rawdatalist=$(ls -d $RAWDATA_FOLDER/*.fastq.gz | awk '{print $NF}') 
 
 for read in ${rawdatalist}
 do
 
 read2=${read/_R1_001.fastq.gz/_R2_001.fastq.gz}
-fname=$(basename ${read} | sed -e "s/_R1_001.fastq.gz//") #strip extension
-echo "Running bbduk on sample ${fname}"
+fname=$(basename ${read} | sed -e "s/_R1_001.fastq.gz//") #strip extension... too specific, need general solution
+#echo "Running bbduk on sample ${fname}"
 
-bbduk.sh in1=${read} in2=${read2} \
+bbduk.sh -Xmx128g in1=${read} in2=${read2} \
  out1=bbduk_trimmed_reads/${fname}_cleaned_1.fastq.gz out2=bbduk_trimmed_reads/${fname}_cleaned_2.fastq.gz \
  ref=${DOCS_FOLDER}/BBDUK_adapters/adapters.fa \
- ktrim=r k=21 mink=10 hdist=2 qtrim=r trimq=25 minlen=100 t=7  # hdist=2 two mismatches tolerated, minlen >= 100bp, 25 phred score threshold, multithreading (7 threads), sequences 20-mer...10mer in length at 3’ ends also searched and trimmed
+ ktrim=r k=21 mink=10 hdist=2 qtrim=r trimq=25 minlen=100 t=7 tpe tbo >>bbduk_trimmed_reads/bbduklog.txt 2>&1  # hdist=2 two mismatches tolerated, minlen >= 100bp, 25 phred score threshold, multithreading (7 threads), sequences 20-mer...10mer in length at 3’ ends also searched and trimmed
 
 done 
 

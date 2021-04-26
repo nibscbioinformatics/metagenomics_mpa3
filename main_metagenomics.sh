@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-
-### Workflow for shotgun metagenomics analysis
+### Workflow for shotgun metagenomics 16S taxonomic classification
 
 ## Root folder name
 NAME=nibsc_metagenomics
@@ -9,7 +8,7 @@ NAME=nibsc_metagenomics
 echo "Please Check File Paths in main_metagenomics.sh"
 
 ## data file locations
-READS='/home/AD/mgordon/PROJECTS/Microbiome_Project/31_03_21_Shotgun_Sequencing/rawdata' #your data
+READS='/home/AD/mgordon/PROJECTS/Microbiome_Project/31_03_21_Shotgun_Sequencing/rawdata/' #your data
 LINKPATH_DB='/home/AD/mgordon/PROJECTS/Microbiome_Project/31_03_21_Shotgun_Sequencing/metagenomics_mpa3/reference' #change path
  
 ## metagenomics analysis workflow - comment out to remove process
@@ -18,8 +17,7 @@ metagenomics_analysis_main(){
    
    create_folders 
    set_variables # -> Never comment this function
-   #test_data # -> NOT Finished! sample data not in correct format
-   copy_rawdata 
+   #test_data # -> NOT Finished! sample data not in correct format 
    activate_conda
    run_bbduk 
    run_seqtk
@@ -46,46 +44,37 @@ set_variables(){
    echo "Setting variables for paths..."
 
    export ROOT_FOLDER_NAME=${NAME}
-   export RAWDATA_FOLDER=$(pwd)/$ROOT_FOLDER_NAME/rawdata
-   export ANALYSIS_FOLDER=$(pwd)/$ROOT_FOLDER_NAME/analysis
-   export REFERENCE_FOLDER=$(pwd)/$ROOT_FOLDER_NAME/reference
-   export DOCS_FOLDER=$(pwd)//$ROOT_FOLDER_NAME/docs
-   export LINKPATH_DB=$LINKPATH_DB
+   export RAWDATA_FOLDER=$(pwd)/${ROOT_FOLDER_NAME}/rawdata
+   export ANALYSIS_FOLDER=$(pwd)/${ROOT_FOLDER_NAME}/analysis
+   export REFERENCE_FOLDER=$(pwd)/${ROOT_FOLDER_NAME}/reference
+   export DOCS_FOLDER=$(pwd)//${ROOT_FOLDER_NAME}/docs
+   export LINKPATH_DB=${LINKPATH_DB}
    echo "DONE setting variables for paths!"
 
-   #soft link files
-   #instead of copying over these large data files create links?
-   echo "Ordering Folders"
+   #soft link files (for clarification)
+   echo "Lnking Folders"
    mkdir -p ${DOCS_FOLDER}/BBDUK_adapters
-   ln -s $(pwd)/docs/adapters.fa ${DOCS_FOLDER}/BBDUK_adapters/ 
+   ln -fsv $(pwd)/docs/adapters.fa ${DOCS_FOLDER}/BBDUK_adapters/
+   ln -fsv ${READS}/*.fastq.gz ${RAWDATA_FOLDER}
+   echo "DONE linking folders!"
 }
 
-# copy raw data from source 
 
-copy_rawdata(){
-
-   lst=$(ls -d ${READS}/*.fastq.gz)
-   for file in $lst
-   do
-      echo "Copying ${file}"
-      cp ${file} ${RAWDATA_FOLDER}/
-   done
-   echo "DONE copying rawdata!"
-}
-
-# run pipeline using test data (uncomment above).. 
+# run pipeline using test data (uncomment above)..
+# to run pipeline with your own data, comment 
 
 test_data(){
 
-   mkdir -p $NAME/example_data
+   mkdir -p ${ROOT_FOLDER_NAME}/example_data
 
-   cd $NAME/example_data
+   cd ${ROOT_FOLDER_NAME}/example_data
 
+   #change data..
+   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_1.fastq.gz
+   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_2.fastq.gz
 
-#   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_1.fastq.gz
-#   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_2.fastq.gz
-
-   SRC_RAWDATA=$NAME/example_data
+   TEST_RAWDATA=${ROOT_FOLDER_NAME}/example_data
+   export RAWDATA_FOLDER=$(pwd)/${ROOT_FOLDER_NAME}/example_data
    cd -
 }
 

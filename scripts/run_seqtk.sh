@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-### Read subsampling (500k) & merging (adjust parameters as necessary)
+### Read subsampling (500k) & file merging (adjust parameters as necessary)
 
-# Reads are subsampled to 250,000 per file and combined to give 500,000 reads total
+# Reads are subsampled to 250,000 per file and combined 
 # -S option NB to keep same for both strands to preserve read pairing 
 
 seqtk_main(){
@@ -20,11 +20,11 @@ trimdatalist=$(ls -d ${ANALYSIS_FOLDER}/bbduk_trimmed_reads/*_cleaned_1.fastq.gz
 
 for read in ${trimdatalist}
 do
-echo $read
+#echo $read
 read2=${read/_cleaned_1.fastq.gz/_cleaned_2.fastq.gz}
-echo $read2
+#echo $read2
 fname=$(basename ${read} | sed -e "s/_cleaned_1.fastq.gz//") #strip path and extension
-echo $fname
+#echo $fname
 echo "Running seqtk subsamping (500k) & merging on sample ${fname}"
 
 seqtk sample -s100 ${read} 250000 > seqtk_output/${fname}_250K_1.fastq.gz

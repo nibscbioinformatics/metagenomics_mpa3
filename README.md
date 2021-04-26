@@ -25,8 +25,6 @@ metagenomics_analysis_main(){
    create_folders 
    set_variables # -> Never comment this function
    #test_data # -> #uncomment this line to run test
-   copy_rawdata 
-   activate_conda
    run_bbduk 
    run_seqtk
    run_metaphlan
@@ -34,7 +32,7 @@ metagenomics_analysis_main(){
 }
 
 ```
-This will download a test dataset and execute the pipeline to ensure everything is working correctly.
+This will download a small test dataset and execute the pipeline to ensure everything is working correctly.
 
 *Change this for real test data*
 The test data used for this workflow was provided by the authors of 'Developing standards for the microbiome field' (https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00856-3])
@@ -105,6 +103,8 @@ The metagenomics pipeline scripts are contained within the `metagenomics_mpa3/sc
 - -qtrim : quality trimming 
 - -minlen : minimum lenght of sequences
 - -t : number of threads
+- -tpe : trim read pairs to same length
+- -tbo : trim adapters based on pair overlap detection using BBMerge
 
 **Seqtk** *Parameters*
 
@@ -119,7 +119,8 @@ The metagenomics pipeline scripts are contained within the `metagenomics_mpa3/sc
 - --bowtie2_exe : Full path and name of bowtie2 executable
 - --nproc : use multiple CPU
 
-
-
 ## Acknowledgements
 
+Current Challenges and Best Practice Protocols for Microbiome Analysis
+Richa Bharti, Dominik G Grimm
+Briefings in Bioinformatics (BIB), 2019 (in press, https://doi.org/10.1093/bib/bbz155)
