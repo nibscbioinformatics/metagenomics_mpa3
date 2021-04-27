@@ -24,7 +24,7 @@ metagenomics_analysis_main(){
    
    create_folders 
    set_variables # -> Never comment this function
-   #test_data # -> #uncomment this line to run test
+   test_data # -> #uncomment this line to run test
    run_bbduk 
    run_seqtk
    run_metaphlan
@@ -56,14 +56,18 @@ cd metagenomics_mpa3
 conda env create --name metaphlan3 --file=./docs/environment.yml
 ```
 
+4. Activate the metaphlan3 conda environment
+```
+conda activate metaphlan3
+```
 
-4. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database.
+5. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database.
 
 ```
 ./prepare_metaphlandb.sh
 ```
 
-5. Change the `$READS` and `$LINKPATH_DB` file paths in the `main_metagenomics.sh` script.
+6. Change the `$READS` and `$LINKPATH_DB` file paths in the `main_metagenomics.sh` script.
 - `$READS` path should point to the folder containing your reads.
 - `$LINKPATH_DB` should point to the folder storing the metaphlan reference database (given as output by `prepare_metaphlandb.sh`)
 
@@ -82,12 +86,12 @@ READS=/FULL/PATH/TO/data/
 LINKPATH_DB=/FULL/PATH/TO/reference 
 ```
 
-6. Finally, run the `main_metagenomics.sh` script.   
+7. Finally, run the `main_metagenomics.sh` script.   
 ```
 ./main_metagenomics.sh
 ```
 
-7. Output will be located in the `nibsc_metagenomics\analysis` folder 
+8. Output will be located in the `nibsc_metagenomics\analysis` folder 
 
 ## Pipeline Execution & Parameters
 
