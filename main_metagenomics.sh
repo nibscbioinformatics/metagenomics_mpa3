@@ -5,6 +5,10 @@
 ## Root folder name
 NAME=nibsc_metagenomics
 
+## PLEASE DO NOT ALTER THIS LINE!
+rm -r $(pwd)/${NAME}/{analysis,docs,rawdata,example_data,reference} ## remove results from old runs 
+
+
 echo "Please ensure READS and LINKPATH filepaths ar correct in main_metagenomics.sh"
 
 ## data file locations

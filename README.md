@@ -5,7 +5,6 @@
 
 This pipeline takes raw Illumina paired-end fastq files as input, performs adapter trimming, subsampling and merging of reads and Metaphlan3 taxonomic classifiction
 
-
 ## Prerequisites
 
 The following is required to run this pipeline:
@@ -98,7 +97,7 @@ This will contain two tables:
 ## Overview of metagenomics_mpa3 Directory
 
 ```bash
-|-docs
+   |-docs
    |-nibsc_metagenomics
    |---analysis
    |-----bbduk_trimmed_reads
@@ -125,7 +124,13 @@ This will contain two tables:
    |-scripts
 ```
 
-
+The `scripts` folder contains all the bash scripts used to execute the pipeline
+The `docs` folder contains the adapter sequences `adapter.fa` and the `environment.yml` file used to create the conda environment.
+The `reference` folder containd the bowtie2 executable and files in `tmp` and the indexed metaphlan3 database in the `metaphlan3` folder. 
+The `nibsc_metagenomics` folder houses all the output from the pipeline (`analysis`), the pipeline input (`rawreads`), the test_data (`example_data`) and resources (`tools`). This includes:
+- The `analysis` folder which contains all the output. The main output is located within the `metaphlan/merged_table` folder, where the total abundance table`merged_abundance_table.txt`and species level abundance tables `merged_species_table.txt` are located.
+- The `rawdata` folder contains the raw read input specifed in `READS` path
+- The `docs` folder contains the adapter sequences `adapter.fa` and the `environment.yml` file used to create the conda environment.
 
 ## Pipeline Execution & Parameters
 
