@@ -5,11 +5,11 @@
 ## Root folder name
 NAME=nibsc_metagenomics
 
-echo "Please Check File Paths in main_metagenomics.sh"
+echo "Please ensure READS and LINKPATH filepaths ar correct in main_metagenomics.sh"
 
 ## data file locations
-READS='/home/AD/mgordon/PROJECTS/Microbiome_Project/31_03_21_Shotgun_Sequencing/rawdata/' #your data
-LINKPATH_DB='/home/AD/mgordon/PROJECTS/Microbiome_Project/31_03_21_Shotgun_Sequencing/metagenomics_mpa3/reference' #change path
+READS='/home/AD/mgordon/PROJECTS/Microbiome_Project/test/testdata/shotgun_data' # change full path your data directory
+LINKPATH_DB='/home/AD/mgordon/PROJECTS/Microbiome_Project/test/metagenomics_mpa3/reference' # change path to LINKPATH provided by `prepare_metaphlan.sh` output
  
 ## metagenomics analysis workflow - comment out to remove process
 
@@ -17,7 +17,7 @@ metagenomics_analysis_main(){
    
    create_folders 
    set_variables # -> Never comment this function
-   test_data # -> Uncomment to test pipeline
+#  test_data # -> Remove '#' before `test_data` to testrun pipeline. Restore '#' to run with your data
    run_bbduk 
    run_seqtk
    run_metaphlan
@@ -50,7 +50,7 @@ set_variables(){
    export LINKPATH_DB=${LINKPATH_DB}
    echo "DONE setting variables for paths!"
 
-   #soft link files (for clarification)
+   #soft link files (puts all relevant files under $ROOT_FOLDER_NAME directory)
    echo "Lnking Folders"
    mkdir -p ${DOCS_FOLDER}/BBDUK_adapters
    ln -fs $(pwd)/docs/adapters.fa ${DOCS_FOLDER}/BBDUK_adapters/
@@ -59,10 +59,7 @@ set_variables(){
 }
 
 
-# run pipeline using test data (uncomment above)..
-# to run pipeline with your own data, comment 
-# location for data : /usr/share/sequencing/nextseq/processed/200318/fastq/
-
+# run pipeline with test data
 
 test_data(){
 

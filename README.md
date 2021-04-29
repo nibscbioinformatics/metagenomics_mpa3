@@ -1,8 +1,7 @@
 <img src="https://static.wixstatic.com/media/e40e76_52d2db31e5264d31aaea0319cb583acf~mv2.png/v1/fill/w_380,h_358,al_c,q_85,usm_0.66_1.00_0.01/NIBSC%20square.webp" alt="Logo of the project" align="right">
 
 # Shotgun Sequencing Metagenomics Pipeline &middot; 
-[![Build Status](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)](https://travis-ci.org/npm/npm) 
-> Metagenomics Shotgun Sequencing 
+> Metaphlan3 Taxonomic Classification
 
 This pipeline takes raw Illumina paired-end fastq files as input, performs adapter trimming, subsampling and merging of reads and Metaphlan3 taxonomic classifiction
 
@@ -12,34 +11,9 @@ This pipeline takes raw Illumina paired-end fastq files as input, performs adapt
 The following is required to run this pipeline:
 - x86_64 Linux OS
 - Conda ((If not installed see [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) ))
-- Paired-end Illumina fastq files in the format `*_R1_*.fastq.gz`
+- Paired-end Illumina fastq files in the format `*_R1_001.fastq.gz` and `*_R2_001.fastq.gz` (this format be modifed in the run_bbduk.sh script - see the comment ('#') sections of this script)
 
-
-### Test data
-
-To test if the pipeline is working correctly, please edit the `main_metagenomics.sh` script and uncomment the `test_data` function 
-
-```bash
-metagenomics_analysis_main(){
-   
-   create_folders 
-   set_variables # -> Never comment this function
-   test_data # -> #uncomment this line to run test
-   run_bbduk 
-   run_seqtk
-   run_metaphlan
-   echo $LINKPATH_DB
-}
-
-```
-This will download a small test dataset and execute the pipeline to ensure everything is working correctly.
-
-*Change this for real test data*
-The test data used for this workflow was provided by the authors of 'Developing standards for the microbiome field' (https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00856-3])
-The data for the study (NCBI Bioproject ID PRJNA622674) can be accessed [here](https://www.ncbi.nlm.nih.gov/sra/10506348,10506347,10506346,10506345,10506339,10506328,10506322,10506321,10506320,10506319,10506318,10506317,10506316,10506315,10506314,10506313,10506312,10506311,10506310,10506309)
-
-
-### Getting Started
+## Getting Started
 
 1. Clone the github repo and navigate to the directory
 
@@ -78,20 +52,80 @@ conda activate metaphlan3
 ### Workflow for shotgun metagenomics analysis
 
 ## Root folder name
-NAME=YOURFOLDERNAME
+NAME=nibsc_metagenomics
 
 echo "Please Check File Paths in main_metagenomics.sh"
 
-READS=/FULL/PATH/TO/data/
-LINKPATH_DB=/FULL/PATH/TO/reference 
+READS='/FULL/PATH/TO/data/' # change full path your data directory
+LINKPATH_DB='/FULL/PATH/TO/reference' # change path to LINKPATH provided by `prepare_metaphlan.sh` output
 ```
 
-7. Finally, run the `main_metagenomics.sh` script.   
+## Test data
+
+To test if the pipeline is working correctly, please edit the `main_metagenomics.sh` script and uncomment the `test_data` function 
+
+```bash
+metagenomics_analysis_main(){
+   
+   create_folders 
+   set_variables # -> Never comment this function
+#   test_data # -> remove the '#' before `test_data` to test the pipeline
+   run_bbduk 
+   run_seqtk
+   run_metaphlan
+   echo $LINKPATH_DB
+}
+
+```
+This will download a small test dataset and execute the pipeline to ensure everything is working correctly.
+
+The test data used for this workflow was provided by the authors of 'Developing standards for the microbiome field' (https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00856-3])
+
+## Running the Pipeline
+
+Finally, run the `main_metagenomics.sh` script.   
 ```
 ./main_metagenomics.sh
 ```
 
-8. Output will be located in the `nibsc_metagenomics\analysis` folder 
+## Accessing the Output
+
+Output will be located in the `nibsc_metagenomics/analysis/metaphlan3/merged_table` folder.
+This will contain two tables: 
+- a table containing all species-level taxonomic classifications with relative abundance estimates per-sample `merged_species_table.txt` 
+- a table containing all the taxonomic clades detected and their relative abundances per sample `merged_abundance_table.txt` 
+
+## Overview of metagenomics_mpa3 Directory
+
+```bash
+|-docs
+   |-nibsc_metagenomics
+   |---analysis
+   |-----bbduk_trimmed_reads
+   |-----metaphlan
+   |-------merged_table
+   |-------profiles
+   |-----seqtk_output
+   |---docs
+   |-----BBDUK_adapters
+   |---rawdata
+   |---reference
+   |-----reference_database
+   |-reference
+   |---reference_database
+   |-----metaphlan3
+   |---tmp
+   |-----bowtie2-2.4.2-linux-x86_64
+   |-------doc
+   |-------example
+   |---------index
+   |---------reads
+   |---------reference
+   |-------scripts
+   |-scripts
+```
+
+
 
 ## Pipeline Execution & Parameters
 

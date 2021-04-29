@@ -8,8 +8,8 @@
 prepare_databases_main(){
    create_folders
    prepare_metaphlan
-   #prepare_humanndb #possible future feature
-   #prepare_krakendb Chrysi requested feature
+   #prepare_humanndb #future feature
+   #prepare_krakendb #future feature
    echo "Use this path in main_metagenomics.sh"
    echo "LINKPATH_DB="$REFERENCE_FOLDER
 }
@@ -36,7 +36,7 @@ prepare_metaphlan(){
    echo "Checking and downloading metaphlan database"
    
    if [ -d "${REFERENCE_FOLDER}/reference_database/metaphlan3" ]; then
-      echo "metaphlan3 database already installed" #..improve check; wont catch installation error
+      echo "metaphlan3 database already installed" 
 
 
    else
@@ -44,10 +44,10 @@ prepare_metaphlan(){
       # install bowtie2 to index methaplan genome 
      
       cd $TMP
-      wget https://github.com/BenLangmead/bowtie2/releases/download/v2.4.2/bowtie2-2.4.2-linux-x86_64.zip #uncomment for HPC
+      wget https://github.com/BenLangmead/bowtie2/releases/download/v2.4.2/bowtie2-2.4.2-linux-x86_64.zip
       unzip bowtie2-2.4.2-linux-x86_64.zip
       rm bowtie2-2.4.2-linux-x86_64.zip
-      export PATH=$PATH"${TMP}/bowtie2-2.4.2-linux-x86_64:" #check if works...
+      export PATH=$PATH"${TMP}/bowtie2-2.4.2-linux-x86_64:" 
 
       # download the reference db for metaphlan from dropbox, index using bowtie2
       # adjust treads for indexing to speed up!
