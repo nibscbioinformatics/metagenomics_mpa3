@@ -1,16 +1,16 @@
-<img src="https://static.wixstatic.com/media/e40e76_52d2db31e5264d31aaea0319cb583acf~mv2.png/v1/fill/w_380,h_358,al_c,q_85,usm_0.66_1.00_0.01/NIBSC%20square.webp" alt="Logo of the project" align="right">
+<img src="https://static.wixstatic.com/media/e40e76_52d2db31e5264d31aaea0319cb583acf~mv2.png/v1/fill/w_380,h_358,al_c,q_85,usm_0.66_1.00_0.01/NIBSC%20square.webp" alt="NIBSC Logo" align="right">
 
-# Shotgun Sequencing Metagenomics Pipeline &middot; 
+# Shotgun Sequencing Metagenomics Pipeline for Collaborative Study
 > Metaphlan3 Taxonomic Classification
 
-This pipeline takes raw Illumina paired-end fastq files as input, performs adapter trimming, subsampling and merging of reads and Metaphlan3 taxonomic classifiction
+This pipeline takes raw Illumina paired-end fastq files as input, performs adapter trimming, subsampling and merging of reads and Metaphlan3 taxonomic classifiction.
 
 ## Prerequisites
 
 The following is required to run this pipeline:
 - x86_64 Linux OS
 - Conda ((If not installed see [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) ))
-- Paired-end Illumina fastq files in the format `*_R1_001.fastq.gz` and `*_R2_001.fastq.gz` (this format be modifed in the run_bbduk.sh script - see the comment ('#') sections of this script)
+- Paired-end Illumina fastq files in the naming format `*_R1_001.fastq.gz` and `*_R2_001.fastq.gz` (this format be modifed in the run_bbduk.sh script - see the comment ('#') sections of this script)
 
 ## Getting Started
 
@@ -21,7 +21,11 @@ git clone https://github.com/nibscbioinformatics/metagenomics_mpa3.git
 cd metagenomics_mpa3
 ```
 
-2. Activate conda 
+2. Verify that that conda is installed and available
+
+```
+conda --version
+```
 
 3. Create a conda enviroment to perform the analysis by running the following (**NB environment must be named metaphlan3**)
 
@@ -40,7 +44,7 @@ conda activate metaphlan3
 ./prepare_metaphlandb.sh
 ```
 
-6. Change the `$READS` and `$LINKPATH_DB` file paths in the `main_metagenomics.sh` script.
+6. Change the `$READS` and `$LINKPATH_DB` file path variables in the `main_metagenomics.sh` script:
 - `$READS` path should point to the folder containing your reads.
 - `$LINKPATH_DB` should point to the folder storing the metaphlan reference database (given as output by `prepare_metaphlandb.sh`)
 
@@ -59,7 +63,7 @@ READS='/FULL/PATH/TO/data/' # change full path your data directory
 LINKPATH_DB='/FULL/PATH/TO/reference' # change path to LINKPATH provided by `prepare_metaphlan.sh` output
 ```
 
-## Test data
+## Test Data
 
 To test if the pipeline is working correctly, please edit the `main_metagenomics.sh` script and uncomment the `test_data` function 
 
@@ -124,9 +128,9 @@ This will contain two tables:
    |-scripts
 ```
 
-The `scripts` folder contains all the bash scripts used to execute the pipeline
+The `scripts` folder contains all the bash scripts used to execute the pipeline.
 The `docs` folder contains the adapter sequences `adapter.fa` and the `environment.yml` file used to create the conda environment.
-The `reference` folder containd the bowtie2 executable and files in `tmp` and the indexed metaphlan3 database in the `metaphlan3` folder. 
+The `reference` folder contains the bowtie2 executable and files in `tmp` and the indexed metaphlan3 database in the `metaphlan3` folder. 
 The `nibsc_metagenomics` folder houses all the output from the pipeline (`analysis`), the pipeline input (`rawreads`), the test_data (`example_data`) and resources (`tools`). This includes:
 - The `analysis` folder which contains all the output. The main output is located within the `metaphlan/merged_table` folder, where the total abundance table`merged_abundance_table.txt`and species level abundance tables `merged_species_table.txt` are located.
 - The `rawdata` folder contains the raw read input specifed in `READS` path
@@ -138,29 +142,29 @@ The metagenomics pipeline scripts are contained within the `metagenomics_mpa3/sc
 
 **BBduk** *Parameters*
 
-- -Xmx : memory allocation for task
-- -ktrim : trim bases to right of kmer read:adapter match
-- -k : k-mer size of reads & adapters
-- -mink : value for shortest k-mer size searched
-- -hdist : hamming distance (mismatches tolerated)
-- -qtrim : quality trimming 
-- -minlen : minimum lenght of sequences
-- -t : number of threads
-- -tpe : trim read pairs to same length
-- -tbo : trim adapters based on pair overlap detection using BBMerge
+- `-Xmx`: memory allocation for task
+- `-ktrim`: trim bases to right of kmer read:adapter match
+- `-k`: k-mer size of reads & adapters
+- `-mink`: value for shortest k-mer size searched
+- `-hdist`: hamming distance (mismatches tolerated)
+- `-qtrim`: quality trimming 
+- `-minlen`: minimum lenght of sequences
+- `-t`: number of threads
+- `-tpe`: trim read pairs to same length
+- `-tbo`: trim adapters based on pair overlap detection using BBMerge
 
 **Seqtk** *Parameters*
 
-- -s : random seed (**Use same random seed for read pairing**)
+- `-s`: random seed (**Use same random seed for read pairing**)
 
 **Metaphlan** *Parameters*
 
-- --input_type : FASTQ or BAM 
-- --index : Run the analysis using this database version
-- --no-map : Do not store intermediate bowtie2 map file
-- --bowtie2db : Use the pre-built metaphlan3 database at the specficed location
-- --bowtie2_exe : Full path and name of bowtie2 executable
-- --nproc : use multiple CPU
+- `--input_type`: FASTQ or BAM 
+- `--index`: Run the analysis using this database version
+- `--no-map`: Do not store intermediate bowtie2 map file
+- `--bowtie2db`: Use the pre-built metaphlan3 database at the specficed location
+- `--bowtie2_exe`: Full path and name of bowtie2 executable
+- `--nproc`: use multiple CPU
 
 ## Acknowledgements
 
