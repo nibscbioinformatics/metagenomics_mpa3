@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail # error handling
+
 #Run this script once initally to prepare the metaphlan DB & save the path
 
 #Conflicts between bowtie2 and metaphlan conda dependencies.. 
@@ -13,7 +15,6 @@ prepare_databases_main(){
    echo "Use this path in main_metagenomics.sh"
    echo "LINKPATH_DB="$REFERENCE_FOLDER
 }
-
 
 create_folders(){
 

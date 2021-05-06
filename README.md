@@ -55,7 +55,7 @@ conda activate metaphlan3
 ### Workflow for shotgun metagenomics analysis
 
 ## Root folder name
-NAME=nibsc_metagenomics
+NAME=NIBSC_CS690_M1R
 
 echo "Please Check File Paths in main_metagenomics.sh"
 
@@ -93,7 +93,7 @@ Finally, run the `main_metagenomics.sh` script.
 
 ## Accessing the Output
 
-Output will be located in the `nibsc_metagenomics/analysis/metaphlan3/merged_table` folder.
+Output will be located in the `NIBSC_CS690_M1R/analysis/metaphlan3/merged_table` folder.
 This will contain two tables: 
 - a table containing all species-level taxonomic classifications with relative abundance estimates per-sample `merged_species_table.txt` 
 - a table containing all the taxonomic clades detected and their relative abundances per sample `merged_abundance_table.txt` 
@@ -102,7 +102,7 @@ This will contain two tables:
 
 ```bash
    |-docs
-   |-nibsc_metagenomics
+   |-NIBSC_CS690_M1R
    |---analysis
    |-----bbduk_trimmed_reads
    |-----metaphlan
@@ -131,7 +131,7 @@ This will contain two tables:
 The `scripts` folder contains all the bash scripts used to execute the pipeline.
 The `docs` folder contains the adapter sequences `adapter.fa` and the `environment.yml` file used to create the conda environment.
 The `reference` folder contains the bowtie2 executable and files in `tmp` and the indexed metaphlan3 database in the `metaphlan3` folder. 
-The `nibsc_metagenomics` folder houses all the output from the pipeline (`analysis`), the pipeline input (`rawreads`), the test_data (`example_data`) and resources (`tools`). This includes:
+The `NIBSC_CS690_M1R` folder houses all the output from the pipeline (`analysis`), the pipeline input (`rawreads`), the test_data (`example_data`) and resources (`tools`). This includes:
 - The `analysis` folder which contains all the output. The main output is located within the `metaphlan/merged_table` folder, where the total abundance table`merged_abundance_table.txt`and species level abundance tables `merged_species_table.txt` are located.
 - The `rawdata` folder contains the raw read input specifed in `READS` path
 - The `docs` folder contains the adapter sequences `adapter.fa` and the `environment.yml` file used to create the conda environment.

@@ -7,7 +7,7 @@ metaphlan_main(){
 	
 	run_metaphlan
 	merge_tables
-	#cleanup_tmp #leave out for now
+	#cleanup_tmp 
 
 }
 
@@ -16,7 +16,7 @@ run_metaphlan(){
 # link reference to folders in $ROOT
 
 mkdir -p ${REFERENCE_FOLDER}/reference_database/
-ln -s ${LINKPATH_DB}/reference_database/metaphlan3 ${REFERENCE_FOLDER}/reference_database/ #create sym link
+#ln -s ${LINKPATH_DB}/reference_database/metaphlan3 ${REFERENCE_FOLDER}/reference_database/ #create sym link
 
 mkdir -p ${ANALYSIS_FOLDER}/metaphlan
 mkdir -p ${ANALYSIS_FOLDER}/metaphlan/profiles
@@ -31,7 +31,7 @@ do
    fname=$(basename ${read} | sed -e "s/_500K.fastq.qz//") 
    echo "Running metaphlan on sample ${fname}"
 
-   metaphlan ${read} --input_type fastq --nproc 8 --no_map --index mpa_v30_CHOCOPhlAn_201901 --bowtie2db ${REFERENCE_FOLDER}/reference_database/metaphlan3 --bowtie2_exe ${LINKPATH_DB}/tmp/bowtie2-2.4.2-linux-x86_64/bowtie2 -o ${ANALYSIS_FOLDER}/metaphlan/profiles/${fname}_profile.txt 
+   metaphlan ${read} --input_type fastq --nproc 8 --no_map --index mpa_v30_CHOCOPhlAn_201901 --bowtie2db ${LINKPATH_DB}/reference_database/metaphlan3 --bowtie2_exe ${LINKPATH_DB}/tmp/bowtie2-2.4.2-linux-x86_64/bowtie2 -o ${ANALYSIS_FOLDER}/metaphlan/profiles/${fname}_profile.txt 
 done
 
 }

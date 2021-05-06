@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
 
+set -euo pipefail # error handling
+
 ### Workflow for shotgun metagenomics 16S taxonomic classification
 
-## Root folder name
-NAME=nibsc_metagenomics
+## Root folder name - 
+NAME=NIBSC_CS690_M1R
 
-## PLEASE DO NOT ALTER THIS LINE!
-rm -r $(pwd)/${NAME}/{analysis,docs,rawdata,example_data,reference} ## remove results from old runs 
+## PLEASE DO NOT ALTER THIS SECTION! 
+## Clean-up from previous run
+array=("$(pwd)/${NAME}/analysis" "$(pwd)/${NAME}/docs" "$(pwd)/${NAME}/example_data" "$(pwd)/${NAME}/rawdata")
 
+for dir in "${array[@]}"
+do
+   if [ -d "$dir" ]; then
+      echo "removing $dir"
+      rm -r "$dir"
+   fi
+done 
 
 echo "Please ensure READS and LINKPATH filepaths ar correct in main_metagenomics.sh"
 
