@@ -31,7 +31,7 @@ metagenomics_analysis_main(){
    
    create_folders 
    set_variables # -> Never comment this function
-#  test_data # -> Remove '#' before `test_data` to testrun pipeline. Restore '#' to run with your data
+#   test_data # -> Remove '#' before `test_data` to testrun pipeline. Restore '#' to run with your data
    run_bbduk 
    run_seqtk
    run_metaphlan
@@ -84,13 +84,15 @@ test_data(){
    #change data..use cp for now on HPC
    echo "Copying test data"
 
-   cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2a_S118_R1_001.fastq.gz .
-   cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2a_S118_R2_001.fastq.gz .
-   cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2b_S119_R1_001.fastq.gz .
-   cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2b_S119_R2_001.fastq.gz .
- 
- #  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_1.fastq.gz
- #  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/039/SRR11487939/SRR11487939_2.fastq.gz
+   #cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2a_S118_R1_001.fastq.gz .
+   #cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2a_S118_R2_001.fastq.gz .
+   #cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2b_S119_R1_001.fastq.gz .
+   #cp -n /usr/share/sequencing/nextseq/processed/200318/fastq/322_FD2b_S119_R2_001.fastq.gz .
+
+   curl -OJL https://sra-download.ncbi.nlm.nih.gov/traces/sra64/SRZ/014462/SRR14462034/322_FD2a_S118_R1_001.fastq.gz . 
+   curl -OJL https://sra-download.ncbi.nlm.nih.gov/traces/sra64/SRZ/014462/SRR14462034/322_FD2a_S118_R2_001.fastq.gz . 
+   curl -OJL https://sra-download.ncbi.nlm.nih.gov/traces/sra67/SRZ/014462/SRR14462033/322_FD2b_S119_R1_001.fastq.gz . 
+   curl -OJL https://sra-download.ncbi.nlm.nih.gov/traces/sra67/SRZ/014462/SRR14462033/322_FD2b_S119_R2_001.fastq.gz . 
 
    cd -
 
