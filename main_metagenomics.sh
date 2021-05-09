@@ -22,8 +22,8 @@ done
 echo "Please ensure READS and LINKPATH filepaths ar correct in main_metagenomics.sh"
 
 ## data file locations
-READS='/home/AD/mgordon/PROJECTS/Microbiome_Project/test/testdata/shotgun_data' # change full path your data directory
-LINKPATH_DB='/home/AD/mgordon/PROJECTS/Microbiome_Project/test/metagenomics_mpa3/reference' # change path to LINKPATH provided by `prepare_metaphlan.sh` output
+READS='/FULL/PATH/TO/DIRECTORY' # change full path your data directory
+LINKPATH_DB='/FULL/PATH/TO/reference' # change path to LINKPATH provided by `prepare_metaphlan.sh` output
  
 ## metagenomics analysis workflow - comment out to remove process
 
