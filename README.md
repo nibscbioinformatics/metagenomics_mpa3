@@ -9,7 +9,7 @@ This pipeline takes raw Illumina paired-end fastq files as input, performs adapt
 
 The following is required to run this pipeline:
 - x86_64 Linux OS
-- Conda ((If not installed see [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) ))
+- Conda (If not installed see [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) )
 - Paired-end Illumina fastq files in the naming format `*_R1_001.fastq.gz` and `*_R2_001.fastq.gz` (this format be modifed in the run_bbduk.sh script - see the comment ('#') sections of this script)
 
 ## Getting Started
@@ -38,7 +38,7 @@ conda env create --name metaphlan3 --file=./docs/environment.yml
 conda activate metaphlan3
 ```
 
-5. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database.
+5. Run the `prepare_metaphlandb.sh` script. This will take some time to run as it downloads and constructs the metaphlan reference database. This will output the `LINKPATH_DB` database path to the terminal which must be copied and pasted into `main_metaphlan.sh` (step 6).
 
 ```
 ./prepare_metaphlandb.sh
@@ -65,7 +65,7 @@ LINKPATH_DB='/FULL/PATH/TO/reference' # change path to LINKPATH provided by `pre
 
 ## Test Data
 
-To test if the pipeline is working correctly, please edit the `main_metagenomics.sh` script and uncomment the `test_data` function 
+To test if the pipeline is working correctly, please edit the `main_metagenomics.sh` script and uncomment the `test_data` function. This dataset will take some time to download (**please ignore the `<!DOCTYPE html PUBLIC...` code block**)
 
 ```bash
 metagenomics_analysis_main(){
@@ -86,7 +86,7 @@ The test data used for this workflow was provided by the authors of 'Developing 
 
 ## Running the Pipeline
 
-Finally, run the `main_metagenomics.sh` script.   
+Finally, run the `main_metagenomics.sh` script.
 ```
 ./main_metagenomics.sh
 ```
